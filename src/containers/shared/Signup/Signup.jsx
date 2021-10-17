@@ -1,15 +1,12 @@
-/* eslint-disable no-unused-vars */
 import React from "react";
-import "./Login.scss";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useDispatch } from "react-redux";
-import { actLogin } from "./module/action";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { actSignup } from "./module/action";
 
 const content = {
-  loginInputs: [
+  signupInputs: [
     {
       label: "Email",
       name: "email",
@@ -20,6 +17,16 @@ const content = {
       name: "password",
       type: "password",
     },
+    {
+      label: "Name",
+      name: "name",
+      type: "text",
+    },
+    {
+      label: "Phone Number",
+      name: "phoneNumber",
+      type: "text",
+    },
   ],
 };
 
@@ -29,15 +36,16 @@ const schema = yup.object().shape({
     .string()
     .required("Please enter password!")
     .min(8, "Password must be at least 8 characters!"),
+  name: yup.string().required("Please enter your name!"),
+  phoneNumber: yup.string().required("Please enter your phone number!"),
 });
-// .required();
 
-export default function Login() {
+export default function Signup() {
   const dispatch = useDispatch();
 
-  const { userLogin } = useSelector((state) => state.userLoginReducer);
+  const { userSignup } = useSelector((state) => state.userSignupReducer);
 
-  console.log("login Test Selector", userLogin);
+  console.log("userSignup", userSignup);
 
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
@@ -45,37 +53,33 @@ export default function Login() {
 
   const onSubmit = (data) => {
     console.log("onSubmit", data);
-    dispatch(actLogin(data));
+    dispatch(actSignup(data));
   };
 
-  console.log(errors);
-
   return (
-    <div className="login__form__container">
+    <div className="">
       <form onSubmit={handleSubmit(onSubmit)}>
-        {content.loginInputs.map((input, key) => {
+        {content.signupInputs.map((input, key) => {
           return (
             <div key={key}>
-              <p className="login__form__p">
+              <p className="">
                 <label>{input.label}</label>
               </p>
               <p>
                 <input
                   name={input.name}
-                  className="login__form__input"
+                  className=""
                   type={input.type}
                   ref={register}
                 />
               </p>
-              <p className="login__form__message">
-                {errors[input.name]?.message}
-              </p>
+              <p className="">{errors[input.name]?.message}</p>
             </div>
           );
         })}
 
-        <button className="login__form__button" type="submit">
-          Log in
+        <button className="" type="submit">
+          Sign up
         </button>
       </form>
     </div>

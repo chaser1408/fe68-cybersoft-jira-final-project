@@ -1,0 +1,43 @@
+.login__form__container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .login__form__p {
+        text-align: start !important;
+    }
+
+    .login__form__input {
+        padding: 8px 20px;
+        width: 300px;
+        max-width: 90%;
+        font-size: 1rem;
+        letter-spacing: 1px;
+    }
+
+    .login__form__button {
+        margin-top: 1rem;
+        padding: 10px 40px;
+        background: black;
+        color: white;
+        text-transform: uppercase;
+        border: none;
+
+        &:hover {
+            background-color: gray;
+        }
+
+        &:focus {
+            background-color: gray;
+        }
+    }
+
+    .login__form__message {
+        color: rgb(172, 50, 50);
+        font-size: 16px;
+        text-align: start !important;
+    }
+}
